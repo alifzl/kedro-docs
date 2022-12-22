@@ -2,7 +2,7 @@
 
 Up to this point, we haven't discussed project dependencies, so now is a good time to introduce them. Specifying a project's dependencies in Kedro makes it easier for others to run your project; it avoids version conflicts by use of the same Python packages.
 
-The generic project template bundles some typical dependencies, in `src/requirements.txt`. Here's a typical example, although you may find that the version numbers are slightly different depending on the version of Kedro that you are using:
+The generic project template bundles some typical dependencies, in `src/requirements.txt`. Here's a typical example:
 
 ```text
 black==v19.10b0 # Used for formatting code with `kedro lint`
@@ -24,7 +24,7 @@ wheel==0.32.2 # The reference implementation of the Python wheel packaging stand
 
 ### Add and remove project-specific dependencies
 
-The dependencies above may be sufficient for some projects, but for the spaceflights project, you need to add a requirement for the `pandas` project because you are working with CSV and Excel files. You can add the necessary dependencies for these files types as follows:
+The dependencies above may be sufficient for some projects, but for many other projects, you'll be need adding a requirement for the `pandas` project because you are working with CSV and Excel files. You can add the necessary dependencies for these files types as follows:
 
 ```bash
 pip install kedro[pandas.CSVDataSet,pandas.ExcelDataSet]
@@ -41,6 +41,9 @@ Then run the following:
 ```bash
 kedro build-reqs
 ```
+
+> Note: `Pandas` and many other pre-requisitions for data science experiments are already added into template's `requirements.txt`. 
+
 
 [`kedro build-reqs`](https://kedro.readthedocs.io/en/stable/09_development/03_commands_reference.html#build-the-project-s-dependency-tree) takes the `requirements.in` file (or `requirements.txt` if it does not yet exist), resolves all package versions and 'freezes' them by putting pinned versions back into `requirements.txt`. This significantly reduces the chances of dependencies issues due to downstream changes as you would always install the same package versions.
 

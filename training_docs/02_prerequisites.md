@@ -12,6 +12,8 @@ We recommend using [Anaconda](https://www.anaconda.com/download) (Python 3.7 ver
 
 ## Installing Kedro
 
+### Using Anaconda/Conda/Miniconda
+
 1. Create a virtual environment:
 
     `conda create --name kedro-trumpet python=3.10 -y`
@@ -20,32 +22,39 @@ We recommend using [Anaconda](https://www.anaconda.com/download) (Python 3.7 ver
 
     `conda activate kedro-trumpet`
 
-3. Install Kedro:
+3. Install Requirements
+    `python  -m pip install --upgrade pip`
+
+    `pip install -e src/requrements.txt` (it would take a while to complete, be patient :)) )
+
+4. Install Kedro:
 
     `pip install kedro`
 
-4. Make sure that the Logo comes up properly!
+5. Make sure that the Logo comes up properly!
 
     `kedro info`
 
 
+### Using virtualenv
+
+    python -m venv .venv
+    source ./.venv/bin/activate
+    python  -m pip install --upgrade pip
+    pip install -e src/requrements.txt
+    pip install -e src
+    kedro info
+
+
 ## Kedro training code
 Download the [Kedro training repository](https://git.mielse.com).
+
+
 ## Git (optional)
 
 Git is a version control system that records changes to files as you work on them. Git is especially helpful for software developers as it allows changes to be tracked (including who and when) across a project.
 
 When you [download `git`](https://git-scm.com/downloads), be sure to choose the correct version for your operating system:
-
-### Installing Git on Windows
-Download the [`git` for Windows installer](https://gitforwindows.org/). Make sure to select **Use `git` from the Windows command prompt** this will ensure that `git` is permanently added to your PATH.
-
-Also select **Checkout Windows-style, commit Unix-style line endings** selected and click on **Next**.
-
-This will provide you both `git` and `git bash`, which you will find useful during the training.
-
-### GitHub
-GitHub is a web-based service for version control using Git. To use it, you will need to [set up an account](https://github.com).
 
 
 ## Checklist
@@ -57,7 +66,7 @@ Please use this checklist to make sure you have everything necessary to particip
 
 - [ ] You have installed [Kedro](#kedro)
 
-- [ ] You have [downloaded the `kedro-training` repository](#kedro-training-code) 
+- [ ] You have [downloaded the `trumpet-data-science-template` repository](#kedro-training-code) 
 
 - [ ] You have [a code editor](#code-editor) installed for writing Python code
 

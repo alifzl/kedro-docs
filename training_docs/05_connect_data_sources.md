@@ -7,72 +7,15 @@ In this section, we discuss the data set-up phase. The steps are as follows:
 
 You can find further information about [the Data Catalog](https://kedro.readthedocs.io/en/stable/05_data/01_data_catalog.html) in specific documentation covering advanced usage.
 
-
 ## Add your datasets to `data`
 
-The spaceflights tutorial makes use of fictional datasets of companies shuttling customers to the Moon and back. You will use the data to train a model to predict the price of shuttle hire. However, before you get to train the model, you will need to prepare the data for model building by creating a master table.
+The Trumpet-Data-Science tutorial makes use of sample datasets of Trumpet staging database. You will use the data to train a model to predict ___________________ . However, before you get to train the model, you will need to prepare the data for model building by creating a master table.
 
-The spaceflight tutorial has three files and uses two data formats: `.csv` and `.xlsx`. Download and save the files to the `data/01_raw/` folder of your project directory:
+The Trumpet-Data-Science tutorial has two files and uses two data formats: `.csv` and `.xlsx`. accessible in the `data/01_raw/` folder of your project directory:
 
-* [reviews.csv](https://kedro-org.github.io/kedro/reviews.csv)
-* [companies.csv](https://kedro-org.github.io/kedro/companies.csv)
-* [shuttles.xlsx](https://kedro-org.github.io/kedro/shuttles.xlsx)
+* [bi_agg_listing.csv](https://kedro-org.github.io/kedro/bi_agg_listing.csv)
+* [bi_agg_listing.xlsx](https://kedro-org.github.io/kedro/bi_agg_listing.xlsx)
 
-Here are some examples of how you can [download the files from GitHub](https://www.quora.com/How-do-I-download-something-from-GitHub) to the `data/01_raw` directory inside your project:
-
-Using [cURL in a Unix terminal](https://curl.se/download.html):
-
-<details>
-<summary><b>Click to expand</b></summary>
-
-```bash
-# reviews
-curl -o data/01_raw/reviews.csv https://kedro-org.github.io/kedro/reviews.csv
-# companies
-curl -o data/01_raw/companies.csv https://kedro-org.github.io/kedro/companies.csv
-# shuttles
-curl -o data/01_raw/shuttles.xlsx https://kedro-org.github.io/kedro/shuttles.xlsx
-```
-</details>
-
-Using [cURL for Windows](https://curl.se/windows/):
-
-<details>
-<summary><b>Click to expand</b></summary>
-
-```bat
-curl -o data\01_raw\reviews.csv https://kedro-org.github.io/kedro/reviews.csv
-curl -o data\01_raw\companies.csv https://kedro-org.github.io/kedro/companies.csv
-curl -o data\01_raw\shuttles.xlsx https://kedro-org.github.io/kedro/shuttles.xlsx
-```
-</details>
-
-Using [Wget in a Unix terminal](https://www.gnu.org/software/wget/):
-
-<details>
-<summary><b>Click to expand</b></summary>
-
-```bash
-# reviews
-wget -O data/01_raw/reviews.csv https://kedro-org.github.io/kedro/reviews.csv
-# companies
-wget -O data/01_raw/companies.csv https://kedro-org.github.io/kedro/companies.csv
-# shuttles
-wget -O data/01_raw/shuttles.xlsx https://kedro-org.github.io/kedro/shuttles.xlsx
-```
-</details>
-
-Using [Wget for Windows](https://eternallybored.org/misc/wget/):
-
-<details>
-<summary><b>Click to expand</b></summary>
-
-```bat
-wget -O data\01_raw\reviews.csv https://kedro-org.github.io/kedro/reviews.csv
-wget -O data\01_raw\companies.csv https://kedro-org.github.io/kedro/companies.csv
-wget -O data\01_raw\shuttles.xlsx https://kedro-org.github.io/kedro/shuttles.xlsx
-```
-</details>
 
 ## Register the datasets
 
@@ -91,23 +34,19 @@ Kedro supports a number of different data types, and those supported can be foun
 For the spaceflights data, first register the `csv` datasets by adding this snippet to the end of the `conf/base/catalog.yml` file:
 
 ```yaml
-companies:
+agg_listings_csv:
   type: pandas.CSVDataSet
-  filepath: data/01_raw/companies.csv
-
-reviews:
-  type: pandas.CSVDataSet
-  filepath: data/01_raw/reviews.csv
+  filepath: data/01_raw/bi_agg_listing.csv
 ```
 
 To check whether Kedro can load the data correctly, open a `kedro ipython` session and run:
 
 ```python
-companies = catalog.load("companies")
-companies.head()
+agg_listings_df = catalog.load("agg_listings_csv")
+agg_listings_df.head()
 ```
 
-The command loads the dataset named `companies` (as per top-level key in `catalog.yml`) from the underlying filepath `data/01_raw/companies.csv` into the variable `companies`, which is of type `pandas.DataFrame`. The `head` method from `pandas` then displays the first five rows of the DataFrame.
+The command loads the dataset named `agg_listings_csv` (as per top-level key in `catalog.yml`) from the underlying filepath `data/01_raw/bi_agg_listing.csv` into the variable `agg_listings_df`, which is of type `pandas.DataFrame`. The `head` method from `pandas` then displays the first five rows of the DataFrame.
 
 When you have finished, close `ipython` session as follows:
 
@@ -120,16 +59,16 @@ exit()
 Now register the `xlsx` dataset by adding this snippet to the end of the `conf/base/catalog.yml` file:
 
 ```yaml
-shuttles:
+agg_listings_excel:
   type: pandas.ExcelDataSet
-  filepath: data/01_raw/shuttles.xlsx
+  filepath: data/01_raw/bi_agg_listing.xlsx
 ```
 
 To test that everything works as expected, load the dataset within a _new_ `kedro ipython` session and display its first five rows:
 
 ```python
-shuttles = catalog.load("shuttles")
-shuttles.head()
+agg_listings_df = catalog.load("agg_listings_excel")
+agg_listings_df.head()
 ```
 When you have finished, close `ipython` session as follows:
 
@@ -139,9 +78,13 @@ exit()
 
 ## Custom data
 
-Kedro supports a number of datasets out of the box, but you can also add support for any proprietary data format or filesystem in your pipeline.
+Kedro supports a number of datasets out of the box, but you can also add support for any proprietary data format or filesystem in your pipeline. 
 
 You can find further information about [how to add support for custom datasets](https://kedro.readthedocs.io/en/stable/07_extend_kedro/03_custom_datasets.html) in specific documentation covering advanced usage.
+
+
+
+## **All of Conventional databases are now added to template repository. For almost all the cases, there is no need for adding by yourself**
 
 
 _[Go to the next page](./06_jupyter_notebook_workflow.md)_
